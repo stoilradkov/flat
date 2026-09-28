@@ -20,6 +20,15 @@ describe('flat', () => {
     expect(flat(array)).to.deep.equal(array)
   })
 
+  it('preserves null and undefined values in nested arrays', () => {
+    expect(flat([1, [null, [undefined, 2]]])).to.deep.equal([
+      1,
+      null,
+      undefined,
+      2,
+    ])
+  })
+
   describe('emtpy array', () => {
     it('returns an empty array when an empty array is passed', () => {
       const array = []
