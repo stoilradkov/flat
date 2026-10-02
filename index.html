@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flat Lab | Nested Array Explorer</title>
+    <style>
+      :root { color-scheme: light; font-family: system-ui, sans-serif; }
+      body { margin: 0; min-height: 100vh; background: #f4f5f2; color: #17251f; }
+      main { box-sizing: border-box; max-width: 760px; margin: 0 auto; padding: 72px 24px; }
+      .eyebrow { color: #326d51; font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+      h1 { margin: 12px 0; font-size: clamp(2.5rem, 7vw, 4.5rem); letter-spacing: -.06em; line-height: 1.05; }
+      p { max-width: 580px; line-height: 1.6; }
+      .panel { margin-top: 36px; padding: 28px; border: 1px solid #cad8cf; border-radius: 18px; background: #fff; box-shadow: 0 12px 32px #17251f0d; }
+      label { display: block; margin-bottom: 10px; font-weight: 700; }
+      textarea, output { box-sizing: border-box; display: block; width: 100%; padding: 16px; border: 1px solid #aebfb3; border-radius: 10px; font: 1rem/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; }
+      textarea { min-height: 110px; resize: vertical; }
+      button { margin: 18px 0 24px; padding: 12px 20px; border: 0; border-radius: 10px; background: #245a40; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+      button:hover, button:focus-visible { background: #17442e; }
+      output { min-height: 58px; overflow-wrap: anywhere; background: #f4f8f5; }
+      output.error { color: #9b2c2c; background: #fff4f4; }
+      .hint { font-size: .9rem; color: #4c6254; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">A tiny JavaScript demo</div>
+      <h1>Flat Lab</h1>
+      <p>Turn a nested array into a single list. This page uses the repository’s <code>flat.js</code> function directly, with no build step or external dependencies.</p>
+      <section class="panel" aria-label="Nested array explorer">
+        <label for="input">Nested array (JSON)</label>
+        <textarea id="input" spellcheck="false">[1, [2, [3, 4]], 5]</textarea>
+        <p class="hint">Try another valid JSON array and press Flatten array.</p>
+        <button id="run" type="button">Flatten array</button>
+        <label for="result">Result</label>
+        <output id="result" aria-live="polite">[1,2,3,4,5]</output>
+      </section>
+    </main>
+    <script src="flat.js"></script>
+    <script>
+      const input = document.getElementById('input')
+      const result = document.getElementById('result')
+      document.getElementById('run').addEventListener('click', () => {
+        try {
+          const parsed = JSON.parse(input.value)
+          result.textContent = JSON.stringify(window.flat(parsed))
+          result.classList.remove('error')
+        } catch (error) {
+          result.textContent = error.message
+          result.classList.add('error')
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -20,4 +20,10 @@ const flat = (items) => {
   return flatArray
 }
 
-module.exports = flat
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = flat
+}
+
+if (typeof window !== 'undefined') {
+  window.flat = flat
+}
