@@ -2,6 +2,10 @@
 
 A small JavaScript utility that turns nested arrays into one flat array.
 
+## Live demo
+
+Try the [Flat Lab demo](https://stoilradkov.github.io/flat/) in your browser.
+
 ## Usage
 
 ```js
